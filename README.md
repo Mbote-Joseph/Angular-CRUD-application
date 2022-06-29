@@ -2,6 +2,157 @@
 
 ![portfolio](./src/assets/images/photo.png)
 
+## Read users data
+
+```
+getEmployeeDetails() {
+    this.api.getEmployee().subscribe((res: any) => {
+      console.log(res);
+      this.employeeData = res;
+    });
+  }
+```
+
+### Add a new user
+
+![portfolio](./src/assets/images/add.png)
+
+```
+ postEmployeeDetails() {
+    this.showUpdate = false;
+    this.showAdd = true;
+    this.employeeModelObject.empID = this.formValue.value.empID;
+    this.employeeModelObject.firstName = this.formValue.value.firstName;
+    this.employeeModelObject.lastName = this.formValue.value.lastName;
+    this.employeeModelObject.email = this.formValue.value.email;
+    this.employeeModelObject.phone = this.formValue.value.phone;
+    this.employeeModelObject.salary = this.formValue.value.salary;
+
+    console.log(this.employeeModelObject);
+
+    this.api.postEmployee(this.employeeModelObject).subscribe(
+      (res: any) => {
+        console.log(res);
+        alert('Employee Added successfully');
+        this.getEmployeeDetails();
+        let ref = document.getElementById('cancel');
+        ref?.click();
+        this.formValue.reset();
+      },
+      (err) => {
+        alert('Something Went wrong');
+      }
+    );
+  }
+```
+
+### Update a user
+
+![portfolio](./src/assets/images/update.png)
+
+```
+updateEmployeeDetails(employee: EmployeeModel) {
+    this.showAdd = false;
+    this.showUpdate = true;
+    this.employeeModelObject.id = employee.id;
+    this.formValue.controls['empID'].setValue(employee.empID);
+    this.formValue.controls['firstName'].setValue(employee.firstName);
+    this.formValue.controls['lastName'].setValue(employee.lastName);
+    this.formValue.controls['email'].setValue(employee.email);
+    this.formValue.controls['phone'].setValue(employee.phone);
+    this.formValue.controls['salary'].setValue(employee.salary);
+  }
+
+  updateEmployee() {
+    this.employeeModelObject.empID = this.formValue.value.empID;
+    this.employeeModelObject.firstName = this.formValue.value.firstName;
+    this.employeeModelObject.lastName = this.formValue.value.lastName;
+    this.employeeModelObject.email = this.formValue.value.email;
+    this.employeeModelObject.phone = this.formValue.value.phone;
+    this.employeeModelObject.salary = this.formValue.value.salary;
+
+    console.log(this.employeeModelObject);
+
+    this.api
+      .updateEmployee(this.employeeModelObject, this.employeeModelObject.id)
+      .subscribe(
+        (res: any) => {
+          console.log(res);
+          alert('Employee Updated successfully');
+          this.getEmployeeDetails();
+          let ref = document.getElementById('cancel');
+          ref?.click();
+          this.formValue.reset();
+        },
+        (err) => {
+          alert('Something Went wrong');
+        }
+      );
+  }
+
+```
+
+### Delete a user
+
+```
+  deleteEmployeeDetails(id: number) {
+    this.api.deleteEmployee(id).subscribe((res: any) => {
+      console.log(res);
+      alert('Employee Deleted successfully');
+      this.getEmployeeDetails();
+    });
+  }
+```
+
+### Service Description
+
+```
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class ApiService {
+  url = 'http://localhost:3000/posts';
+  constructor(private http: HttpClient) {}
+
+  postEmployee(data: any) {
+    return this.http.post<any>(`${this.url}`, data).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
+
+  getEmployee() {
+    return this.http.get<any>(`${this.url}`).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
+
+  updateEmployee(data: any, id: number) {
+    return this.http.put<any>(`${this.url}/` + id, data).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
+
+  deleteEmployee(id: number) {
+    return this.http.delete<any>(`${this.url}/` + id).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
+}
+
+```
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.17.
 
 ## Development server
