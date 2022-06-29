@@ -1,0 +1,41 @@
+{
+  "posts": [
+    {
+      "id": 2,
+      "empID": "31730",
+      "firstName": "Joseph ",
+      "lastName": "Mbote",
+      "email": "mbotejoseph001@gmail.com",
+      "phone": "0792622515",
+      "salary": "200000"
+    },
+    {
+      "id": 3,
+      "empID": "31730",
+      "firstName": "Joseph ",
+      "lastName": "Mbote",
+      "email": "mbotejoseph001@gmail.com",
+      "phone": "0792622515",
+      "salary": "200000"
+    },
+    {
+      "id": 4,
+      "empID": "31730",
+      "firstName": "Joseph ",
+      "lastName": "Mbote",
+      "email": "mbotejoseph001@gmail.com",
+      "phone": "0792622515",
+      "salary": "200000"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
