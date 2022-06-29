@@ -1,6 +1,6 @@
 # CrudApp
 
-![portfolio](../CrudApp/src/assets/images/photo.png)
+![portfolio](./src/assets/images/photo.png)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.17.
 
