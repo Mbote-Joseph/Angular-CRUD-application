@@ -45,6 +45,7 @@ export class EmployeeDashboardComponent implements OnInit {
       (res: any) => {
         console.log(res);
         alert('Employee Added successfully');
+        this.getEmployeeDetails();
         let ref = document.getElementById('cancel');
         ref?.click();
         this.formValue.reset();

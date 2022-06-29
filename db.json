@@ -26,6 +26,33 @@
       "email": "mbotejoseph001@gmail.com",
       "phone": "0792622515",
       "salary": "20000"
+    },
+    {
+      "id": 7,
+      "empID": "3000",
+      "firstName": "Agnes",
+      "lastName": "Minoo",
+      "email": "aggie@gmail.com",
+      "phone": "546789",
+      "salary": "4500"
+    },
+    {
+      "id": 8,
+      "empID": "45",
+      "firstName": "Juma",
+      "lastName": "Ali Kiwaka",
+      "email": "juma@gmail.com",
+      "phone": "5677898",
+      "salary": "8500"
+    },
+    {
+      "id": 9,
+      "empID": "0011",
+      "firstName": "John",
+      "lastName": "Mwangi",
+      "email": "john@gmail.com",
+      "phone": "768909",
+      "salary": "7000"
     }
   ],
   "comments": [],
