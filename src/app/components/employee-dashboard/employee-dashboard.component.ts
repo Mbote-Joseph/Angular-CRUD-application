@@ -12,6 +12,7 @@ export class EmployeeDashboardComponent implements OnInit {
   formValue!: FormGroup;
 
   employeeModelObject: EmployeeModel = new EmployeeModel();
+  employeeData: EmployeeModel[] = [];
   constructor(private formBuilder: FormBuilder, private api: ApiService) {}
 
   ngOnInit(): void {
@@ -23,6 +24,7 @@ export class EmployeeDashboardComponent implements OnInit {
       phone: [''],
       salary: [''],
     });
+    this.getEmployeeDetails();
   }
 
   postEmployeeDetails() {
@@ -39,6 +41,9 @@ export class EmployeeDashboardComponent implements OnInit {
       (res: any) => {
         console.log(res);
         alert('Employee Added successfully');
+        let ref = document.getElementById('cancel');
+        ref?.click();
+        this.formValue.reset();
       },
       (err) => {
         alert('Something Went wrong');
@@ -46,7 +51,29 @@ export class EmployeeDashboardComponent implements OnInit {
     );
   }
 
-  submitForm() {
-    console.log(this.formValue.value);
+  getEmployeeDetails() {
+    this.api.getEmployee().subscribe((res: any) => {
+      console.log(res);
+      this.employeeData = res;
+    });
+  }
+
+  updateEmployeeDetails(employee: EmployeeModel) {
+    this.formValue.patchValue({
+      empID: employee.empID,
+      firstName: employee.firstName,
+      lastName: employee.lastName,
+      email: employee.email,
+      phone: employee.phone,
+      salary: employee.salary,
+    });
+  }
+
+  deleteEmployeeDetails(id: number) {
+    this.api.deleteEmployee(id).subscribe((res: any) => {
+      console.log(res);
+      alert('Employee Deleted successfully');
+      this.getEmployeeDetails();
+    });
   }
 }

@@ -102,7 +102,12 @@
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          <button
+            type="button"
+            id="cancel"
+            class="btn btn-secondary"
+            data-dismiss="modal"
+          >
             Close
           </button>
           <button
@@ -134,25 +139,29 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-        <td>6778885</td>
-        <td>$1,000,000</td>
-        <td><button class="btn btn-success">Edit</button></td>
-        <td><button class="btn btn-danger">Delete</button></td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-        <td>6778885</td>
-        <td>$1,000,000</td>
-        <td><button class="btn btn-success">Edit</button></td>
-        <td><button class="btn btn-danger">Delete</button></td>
+      <tr *ngFor="let employee of employeeData">
+        <th scope="row">{{ employee.empID }}</th>
+        <td>{{ employee.firstName }}</td>
+        <td>{{ employee.lastName }}</td>
+        <td>{{ employee.email }}</td>
+        <td>{{ employee.phone }}</td>
+        <td>{{ employee.salary | currency }}</td>
+        <td>
+          <button
+            class="btn btn-success"
+            (click)="updateEmployeeDetails(employee)"
+          >
+            Edit
+          </button>
+        </td>
+        <td>
+          <button
+            class="btn btn-danger"
+            (click)="deleteEmployeeDetails(employee.id)"
+          >
+            Delete
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>
