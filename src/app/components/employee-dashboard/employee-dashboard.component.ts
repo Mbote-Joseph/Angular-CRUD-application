@@ -13,6 +13,8 @@ export class EmployeeDashboardComponent implements OnInit {
 
   employeeModelObject: EmployeeModel = new EmployeeModel();
   employeeData: EmployeeModel[] = [];
+  showAdd: boolean = false;
+  showUpdate: boolean = false;
   constructor(private formBuilder: FormBuilder, private api: ApiService) {}
 
   ngOnInit(): void {
@@ -28,6 +30,8 @@ export class EmployeeDashboardComponent implements OnInit {
   }
 
   postEmployeeDetails() {
+    this.showUpdate = false;
+    this.showAdd = true;
     this.employeeModelObject.empID = this.formValue.value.empID;
     this.employeeModelObject.firstName = this.formValue.value.firstName;
     this.employeeModelObject.lastName = this.formValue.value.lastName;
@@ -59,14 +63,42 @@ export class EmployeeDashboardComponent implements OnInit {
   }
 
   updateEmployeeDetails(employee: EmployeeModel) {
-    this.formValue.patchValue({
-      empID: employee.empID,
-      firstName: employee.firstName,
-      lastName: employee.lastName,
-      email: employee.email,
-      phone: employee.phone,
-      salary: employee.salary,
-    });
+    this.showAdd = false;
+    this.showUpdate = true;
+    this.employeeModelObject.id = employee.id;
+    this.formValue.controls['empID'].setValue(employee.empID);
+    this.formValue.controls['firstName'].setValue(employee.firstName);
+    this.formValue.controls['lastName'].setValue(employee.lastName);
+    this.formValue.controls['email'].setValue(employee.email);
+    this.formValue.controls['phone'].setValue(employee.phone);
+    this.formValue.controls['salary'].setValue(employee.salary);
+  }
+
+  updateEmployee() {
+    this.employeeModelObject.empID = this.formValue.value.empID;
+    this.employeeModelObject.firstName = this.formValue.value.firstName;
+    this.employeeModelObject.lastName = this.formValue.value.lastName;
+    this.employeeModelObject.email = this.formValue.value.email;
+    this.employeeModelObject.phone = this.formValue.value.phone;
+    this.employeeModelObject.salary = this.formValue.value.salary;
+
+    console.log(this.employeeModelObject);
+
+    this.api
+      .updateEmployee(this.employeeModelObject, this.employeeModelObject.id)
+      .subscribe(
+        (res: any) => {
+          console.log(res);
+          alert('Employee Updated successfully');
+          this.getEmployeeDetails();
+          let ref = document.getElementById('cancel');
+          ref?.click();
+          this.formValue.reset();
+        },
+        (err) => {
+          alert('Something Went wrong');
+        }
+      );
   }
 
   deleteEmployeeDetails(id: number) {

@@ -111,11 +111,20 @@
             Close
           </button>
           <button
+            *ngIf="!showUpdate"
             type="button"
             class="btn btn-primary"
             (click)="postEmployeeDetails()"
           >
             Add
+          </button>
+          <button
+            *ngIf="showUpdate"
+            type="button"
+            class="btn btn-success"
+            (click)="updateEmployee()"
+          >
+            Update
           </button>
         </div>
       </div>
@@ -149,6 +158,9 @@
         <td>
           <button
             class="btn btn-success"
+            type="button"
+            data-toggle="modal"
+            data-target="#exampleModal"
             (click)="updateEmployeeDetails(employee)"
           >
             Edit
