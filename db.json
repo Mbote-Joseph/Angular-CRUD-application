@@ -53,6 +53,15 @@
       "email": "john@gmail.com",
       "phone": "768909",
       "salary": "7000"
+    },
+    {
+      "id": 10,
+      "empID": "5864",
+      "firstName": "Jose",
+      "lastName": "Mbote M.",
+      "email": "jose001@gmail.com",
+      "phone": "0704031617",
+      "salary": "4000"
     }
   ],
   "comments": [],
